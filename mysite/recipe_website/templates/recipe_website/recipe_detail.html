@@ -1,0 +1,25 @@
+{% extends 'recipe_website/index.html' %}
+{% block title %}
+    Рецепт {{ recipe.pk }}
+{% endblock %}
+
+{% block right_bar %}
+    <h1>{{ recipe.name_recept }}</h1>
+    <img src="{{ recipe.image.url }}" alt="Фото" width=200px>
+    <p>Время приготовления: {{ recipe.cooking_time|time:"h:i" }}</p>
+    <p>{{ recipe.description }}</p>
+    <br>
+    <h3>Ингридиенты</h3>
+    <br>
+    {% for ingredient in recipe.get_ingredients_list %}
+        <p>{{ ingredient }}</p>
+    {% endfor %}
+    <br>
+    <h3>Шаги приготовления</h3>
+    <br>
+    {% for cooking_steps in recipe.get_cooking_steps_list %}
+        <p>{{ cooking_steps }}</p>
+    {% endfor %}
+    <p>Автор: {{ recipe.user }}</p>
+    <a href="{% url 'recipe_website:index_page' %}"></a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'recipe_website/index.html' %}
+
+{% block title %}
+    Вход
+{% endblock %}
+{% block right_bar %}
+    <h1>Вход</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <button type="submit">Отправить</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'recipe_website/index.html' %}
+{% block title %}
+    Страница обновления {{ recipe.pk }}
+{% endblock %}
+
+{% block right_bar %}
+    <h1>Редактирование</h1>
+    <h3>{{ recipe.name_recept }}</h3>
+    <img src="{{ recipe.image.url }}" alt="Фото" width=100px>
+    <p>Время приготовления: {{ recipe.cooking_time|time:"h:i" }}</p>
+    <p>{{ recipe.description }}</p>
+    <p>{{ recipe.cooking_steps|truncatewords:10 }}</p>
+    <p>Автор: {{ recipe.user }}</p>
+    <a href="{% url 'recipe_website:index_page' %}"></a>
+{% endblock %}

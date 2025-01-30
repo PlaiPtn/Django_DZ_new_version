@@ -1,0 +1,13 @@
+{% extends 'recipe_website/index.html' %}
+
+{% block title %}
+    Создание рецепта
+{% endblock %}
+{% block right_bar %}
+    <h1>Создание рецепта</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <button type="submit" class="button">Записать</button>
+    </form>
+{% endblock %}

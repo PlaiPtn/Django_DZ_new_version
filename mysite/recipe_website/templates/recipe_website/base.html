@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href={% static 'static_recipe_website/style.css' %}>
+</head>
+<body>
+    <header class="header">
+        <div class="menu_header">
+            <a href="{% url "recipe_website:index_page" %}"><h2>Главная</h2></a>
+            {% if user.is_authenticated %}
+                <a href="{% url "recipe_website:my_recept" %}"><h2>Мои рецепты</h2></a>
+                <a href="{% url "recipe_website:create_recept" %}"><h2>Написать рецепт</h2></a>
+                <a href="{% url "recipe_website:logout" %}"><h2>Выход</h2></a>
+                 {% else %}
+                <a href="{% url "recipe_website:registration" %}"><h2>Регистрация</h2></a>
+                <a href="{% url "recipe_website:login" %}"><h2>Вход</h2></a>
+            {% endif %}
+        </div>
+
+    </header>
+    <div class="top_1">
+        <div class="left_bar">
+            {% block left_bar %}
+            {% endblock %}
+        </div>
+        <div class="right_bar">
+            <div class="list_text_center">
+                {% block right_bar %}
+
+                {% endblock %}
+            {% block navigation %}
+                <nav class="list-pages">
+                    <ul>
+                        {% for p in paginator.page_range %}
+                                {% if page_obj.has_other_pages %}
+                                    <nav class="list-pages">
+                                    ...
+                                    </nav>
+                               {% elif page_obj.number == p %}
+                                    <li class="page-num page-num-selected">{{ p }}</li>
+                                {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
+                                    <li class="page-num"><a href="?page={{ p }}">{{ p }}</a></li>
+                               {% endif %}
+                        {% endfor %}
+                    </ul>
+                </nav>
+            {% endblock %}
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
