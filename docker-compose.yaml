@@ -3,10 +3,10 @@
 services:
   app:
     build:
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
     command:
       - gunicorn
-      - django_dz.wsgi:application
+      - mysite.wsgi:application
       - --bind
       - "0.0.0.0:8000"
     ports:
@@ -20,4 +20,4 @@ services:
         max-file: "10"
         max-size: "200k"
     volumes:
-      - ./django_dz/database:/app/database
+      - ./mysite/database:/app/database
