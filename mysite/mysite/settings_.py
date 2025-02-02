@@ -18,9 +18,9 @@ from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(BASE_DIR)
-# DATABASE_DIR = BASE_DIR / "database"
-# DATABASE_DIR.mkdir(exist_ok=True)d
+
+
+
 
 
 
@@ -33,10 +33,11 @@ SECRET_KEY = getenv(
     'django-insecure-j--!4m_a8=zpdlw!z(zymju!*4_c489kibx+%=#n7i@!t*f#by')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = getenv("DJANGO_DEBUG", "0") == "1"
-# DEBUG = True
+# DEBUG = getenv("DJANGO_DEBUG", "0") == "1"
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost'] + getenv("DJANGO_ALLOWED_HOSTS", "").split(",")
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -104,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
     # },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        'OPTIONS': {'min_length': 5,}
+        'OPTIONS': {'min_length': 5, }
     },
     # {
     #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -144,6 +145,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = reverse_lazy('recipe_website:index_page')
 LOGIN_URL = reverse_lazy('recipe_website:login')
 
+
 LOGLEVEL = getenv("DJANGO_LOGLEVEL", "info").upper()
 logging.config.dictConfig({
     "version": 1,
@@ -161,11 +163,10 @@ logging.config.dictConfig({
     },
     "loggers": {
         "": {
-            "level": LOGLEVEL,
+            "leve": LOGLEVEL,
             "handlers": [
                 "console"
             ],
         },
     },
 })
-
