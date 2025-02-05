@@ -4,10 +4,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib.auth.views import LoginView
+from django.core.paginator import Paginator
 from django.urls import reverse, reverse_lazy
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
-from .models import Recipes, Summary
+from .models import Recipes, Summary, Categories
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from .forms import CustomForm, RecipesForm, MyAuthenticationForm
 
@@ -15,16 +16,24 @@ from .forms import CustomForm, RecipesForm, MyAuthenticationForm
 class MainPageView(ListView):
     model = Recipes
     template_name = 'recipe_website/index.html'
-    context_object_name = 'recepts'
     paginate_by = 5
 
 
-def post(request):
-    context = {
-        'recipes': Recipes.objects.filter(user=request.user),
-    }
 
-    return render(request, 'recipe_website/my_recipes.html', context)
+class MyRecipesView(ListView):
+    template_name = 'recipe_website/my_recipes.html'
+    paginate_by = 5
+
+    def get_queryset(self):
+        return Recipes.objects.filter(user=self.request.user).order_by('-id')
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     # list_my_recipes = self.get_queryset()
+    #     # context['recipes'] = list_my_recipes
+    #     return context
+
+
 
 
 class RegisterView(CreateView):
@@ -89,16 +98,19 @@ class ReceptDeleteView(LoginRequiredMixin, DeleteView):
 
 class CategoriesRecipesListView(ListView):
     template_name = 'recipe_website/category.html'
-
+    paginate_by = 5
     def get_queryset(self):
         summary = Summary.objects.all()
         recipes = Recipes.objects.all()
+        categories = Categories.objects.all()
         categories_request = self.request.build_absolute_uri().split('/')[-2]
         list_id_recept = summary.filter(categories=categories_request).values_list('recipes_id', flat=True)
-        list_recept = recipes.filter(id__in=list_id_recept)
-        return list_recept
+        list_recept = recipes.filter(id__in=list_id_recept).order_by('-id')
+        category_name = categories.filter(id=categories_request).values_list('categories_name', flat=True)
+        return list_recept, category_name
     def get_context_data(self, **kwargs):
         contex = super().get_context_data(**kwargs)
-        list_recept = self.get_queryset()
+        list_recept, category_name = self.get_queryset()
         contex['recipes'] = list_recept
+        contex['category_name'] = ''.join(category_name)
         return contex

@@ -4,17 +4,20 @@
 {% endblock %}
 
 {% block right_bar %}
-{#        <h1>Рецепты</h1>#}
+    <h1>{{ category_name }}</h1>
     <ul>
         {% for recept in recipes %}
-            <li>
-                <h3><a href="{% url 'recipe_website:recept_detail' pk=recept.pk %}">{{ recept.name_recept }}</a></h3>
-                <img src="{{ recept.image.url }}" alt="Фото" width=100px>
-                <p>Время приготовления: {{ recept.cooking_time|time:"h:i" }}</p>
-                <p>{{ recept.description }}</p>
-                <p>{{ recept.cooking_steps|truncatewords:10 }}</p>
-                <p>Автор: {{ recept.user }}</p>
-            </li>
+            <div class="recept">
+                    <div class="recept_image">
+                        <img src="{{ recept.image.url }}" alt="Фото" width="160px" height="160px">
+                    </div>
+                    <div class="recept_text">
+                        <h3><a href="{% url 'recipe_website:recept_detail' pk=recept.pk %}">{{ recept.name_recept }}</a></h3>
+                        <p>Время приготовления: {{ recept.get_time_str }}</p>
+                        <p>{{ recept.description }}</p>
+                        <p>Автор: {{ recept.user }}</p>
+                    </div>
+            </div>
         {% endfor %}
     </ul>
 {% endblock %}
