@@ -16,14 +16,18 @@ body {
 
 }
 
-h1 {
+h1, h2 {
     text-align: center;
     padding-bottom: 10px;
 }
 
+
 a {
-    /*color: #204a00;*/
     color: #45436b;
+}
+
+a:hover {
+    color: coral;
 }
 
 .header {
@@ -42,13 +46,6 @@ a {
 
 }
 
-/*.menu_header a {*/
-/*    color: #15600b;*/
-/*}*/
-
-a:hover {
-    color: coral;
-}
 
 .top_1 {
     display: flex;
@@ -101,21 +98,8 @@ a:hover {
     float: left;
     width: 75%;
     text-align: left;
-    /*padding: 0 10px 0 0;*/
 }
 
-/*.recept {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*}*/
-/*.recept_image {*/
-/*    width: 22%;*/
-/*    text-align: center;*/
-/*    margin-right: 20px;*/
-/*}*/
-/*.recept_text {*/
-/*    flex: 1;*/
-/*}*/
 
 .recept_text p {
     margin-top: 3px;
@@ -163,8 +147,26 @@ form button:hover, #id_image:hover {
     background-color: #0056b3;
 }
 
+.list-pages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-num {
+    padding: 09px 13px;
+    border-radius: 2px;
+    border: 2px solid #cacbbd;
+    background-color: #fff2e5;
+}
 
 
+.page-num-selected:hover{
+    background-color: #0056b3;
+}
 
-
-
+.categories_my_recept {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}

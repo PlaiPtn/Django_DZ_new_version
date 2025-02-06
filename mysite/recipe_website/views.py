@@ -19,7 +19,6 @@ class MainPageView(ListView):
     paginate_by = 5
 
 
-
 class MyRecipesView(ListView):
     template_name = 'recipe_website/my_recipes.html'
     paginate_by = 5
@@ -32,8 +31,6 @@ class MyRecipesView(ListView):
     #     # list_my_recipes = self.get_queryset()
     #     # context['recipes'] = list_my_recipes
     #     return context
-
-
 
 
 class RegisterView(CreateView):
@@ -57,9 +54,9 @@ class RegisterView(CreateView):
         login(request = self.request, user = user)
         return super().form_valid(form)
 
+
 class Login(LoginView):
     form_class = MyAuthenticationForm
-
 
 
 def logout_view(request: HttpRequest):
@@ -89,6 +86,7 @@ class ReceptUpdateView(LoginRequiredMixin, UpdateView):
     form_class = RecipesForm
     def get_success_url(self):
         return reverse('recipe_website:my_recept')
+
 
 class ReceptDeleteView(LoginRequiredMixin, DeleteView):
     model = Recipes
