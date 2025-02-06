@@ -16,13 +16,18 @@ body {
 
 }
 
-h1 {
+h1, h2 {
     text-align: center;
     padding-bottom: 10px;
 }
 
+
 a {
     color: #45436b;
+}
+
+a:hover {
+    color: coral;
 }
 
 .header {
@@ -41,10 +46,6 @@ a {
 
 }
 
-
-a:hover {
-    color: coral;
-}
 
 .top_1 {
     display: flex;
@@ -150,7 +151,6 @@ form button:hover, #id_image:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    /*flex-wrap: wrap;*/
 }
 
 .page-num {
@@ -160,11 +160,13 @@ form button:hover, #id_image:hover {
     background-color: #fff2e5;
 }
 
-.list-pages a {
-    text-decoration: none;
-}
 
 .page-num-selected:hover{
     background-color: #0056b3;
 }
 
+.categories_my_recept {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}

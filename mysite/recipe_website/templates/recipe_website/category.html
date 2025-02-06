@@ -2,9 +2,11 @@
 {% block title %}
     Категория
 {% endblock %}
-
 {% block right_bar %}
-    <h1>{{ category_name }}</h1>
+    {% if user.is_authenticated %}
+        <h1><a href="{% url "recipe_website:my_recept" %}">Мои рецепты</a></h1>
+    {% endif %}
+    <h2>{{ category_name }}</h2>
     <ul>
         {% for recept in recipes %}
             <div class="recept">

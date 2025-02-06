@@ -99,18 +99,26 @@ class ReceptDeleteView(LoginRequiredMixin, DeleteView):
 class CategoriesRecipesListView(ListView):
     template_name = 'recipe_website/category.html'
     paginate_by = 5
-    def get_queryset(self):
+    def get_queryset(self, user=None):
+        # user_id = self.request.user if user is None else user
+        # print(user_id)
         summary = Summary.objects.all()
         recipes = Recipes.objects.all()
         categories = Categories.objects.all()
-        categories_request = self.request.build_absolute_uri().split('/')[-2]
-        list_id_recept = summary.filter(categories=categories_request).values_list('recipes_id', flat=True)
-        list_recept = recipes.filter(id__in=list_id_recept).order_by('-id')
-        category_name = categories.filter(id=categories_request).values_list('categories_name', flat=True)
+        categories_request = self.request.build_absolute_uri().split('/')
+        print(categories_request)
+        list_id_recept = summary.filter(categories=categories_request[4]).values_list('recipes_id', flat=True)
+        if len(categories_request) == 7:
+            print('да')
+            list_recept = recipes.filter(id__in=list_id_recept, user=self.request.user).order_by('-id')
+        else:
+            print('no')
+            list_recept = recipes.filter(id__in=list_id_recept).order_by('-id')
+        category_name = categories.filter(id=categories_request[4]).values_list('categories_name', flat=True)
         return list_recept, category_name
     def get_context_data(self, **kwargs):
         contex = super().get_context_data(**kwargs)
-        list_recept, category_name = self.get_queryset()
+        list_recept, category_name = self.get_queryset(self.request.user)
         contex['recipes'] = list_recept
         contex['category_name'] = ''.join(category_name)
         return contex

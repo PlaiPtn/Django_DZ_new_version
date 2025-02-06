@@ -5,6 +5,13 @@
 
 {% block right_bar %}
     <h1>Мои рецепты</h1>
+        <div class="categories_my_recept">
+            {% for category, recipes in dict_categories.items %}
+                <div>
+                    <h2><a href="{% url 'recipe_website:categories_user' pk=category.1 user=request.user.pk %}">{{ category.0 }}</a></h2>
+                </div>
+            {% endfor %}
+        </div>
             {% for recept in page_obj %}
 
                 <div class="recept">

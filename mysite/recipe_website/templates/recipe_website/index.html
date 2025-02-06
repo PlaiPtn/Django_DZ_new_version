@@ -3,22 +3,6 @@
     Страница индекс
 {% endblock %}
 
-{#{% block left_bar %}#}
-{#    <div class="left_bar_text">#}
-{#        {% for category, recipes in list_categories.items %}#}
-{#            <div class="category">#}
-{#                <h3><a href="{% url 'recipe_website:categories' pk=category.1 %}">{{ category.0 }}</a></h3>#}
-{#                {% for recept in recipes %}#}
-{#                    <a href="{% url 'recipe_website:recept_detail' pk=recept.pk %}">{{ recept.name_recept }}</a>#}
-{#                    <br>#}
-{#                {% endfor %}#}
-{#            </div>#}
-{#        {% endfor %}#}
-{##}
-{#    </div>#}
-{##}
-{#{% endblock %}#}
-
 {% block right_bar %}
     <h1>Рецепты</h1>
 
@@ -31,7 +15,7 @@
                     </div>
                     <div class="recept_text">
                         <h3><a href="{% url 'recipe_website:recept_detail' pk=recept.pk %}">{{ recept.name_recept }}</a></h3>
-                        <p>Время приготовления: {{ recept.get_time_str }}</p>
+                        <p>Время приготовления: {{ recept.cooking_time|time:"H:i" }}</p>
                         <p>{{ recept.description }}</p>
                         <p>Автор: {{ recept.user }}</p>
                     </div>
