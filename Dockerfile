@@ -7,7 +7,6 @@ RUN pip install --upgrade pip
 RUN pip install -r requarements.txt
 COPY mysite .
 
-# Сбор статических файлов
-RUN python manage.py collectstatic --noinput
+#RUN python manage.py collectstatic --noinput
 
 CMD ["gunicorn", "mysite.wsgi:application", "--bind", "0.0.0.0:8000"]
