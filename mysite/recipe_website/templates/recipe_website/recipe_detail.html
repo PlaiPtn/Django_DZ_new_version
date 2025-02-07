@@ -4,9 +4,11 @@
 {% endblock %}
 
 {% block right_bar %}
-    <h1>{{ recipe.name_recept }}</h1>
-    <img src="{{ recipe.image.url }}" alt="Фото" width=200px>
-    <p>Время приготовления: {{ recipe.cooking_time|time:"H:i" }}</p>
+    <h2>{{ recipe.name_recept }}</h2>
+    <img src="{{ recipe.image.url }}" alt="Фото" class="detail_foto">
+    <br>
+    <p>Время приготовления: {{ recipe.get_time_str }}</p>
+    <br>
     <p>{{ recipe.description }}</p>
     <br>
     <h3>Ингридиенты</h3>

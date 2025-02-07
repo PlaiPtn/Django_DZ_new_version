@@ -4,7 +4,7 @@
     Создание рецепта
 {% endblock %}
 {% block right_bar %}
-    <h1>Создание рецепта</h1>
+    <h2>Создание рецепта</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}

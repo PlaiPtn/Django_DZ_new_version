@@ -21,7 +21,6 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('create/', ReceptCreateView.as_view(), name='create_recept'),
     path('my-recept/', MyRecipesView.as_view(), name='my_recept'),
-    # path('my-recept/', post, name='my_recept'),
     path('recept/<int:pk>/', ReceptDetailView.as_view(), name='recept_detail'),
     path('recept/<int:pk>/update/', ReceptUpdateView.as_view(), name='recept_update'),
     path('recept/<int:pk>/delete/', ReceptDeleteView.as_view(), name='recept_delete'),

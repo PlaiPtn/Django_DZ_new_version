@@ -4,11 +4,11 @@
 {% endblock %}
 
 {% block right_bar %}
-    <h1>Мои рецепты</h1>
+    <h2>Мои рецепты</h2>
         <div class="categories_my_recept">
             {% for category, recipes in dict_categories.items %}
                 <div>
-                    <h2><a href="{% url 'recipe_website:categories_user' pk=category.1 user=request.user.pk %}">{{ category.0 }}</a></h2>
+                    <h3><a href="{% url 'recipe_website:categories_user' pk=category.1 user=request.user.pk %}">{{ category.0 }}</a></h3>
                 </div>
             {% endfor %}
         </div>

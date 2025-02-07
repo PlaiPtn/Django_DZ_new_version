@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block right_bar %}
-    <h1>Редактирование</h1>
+    <h2>Редактирование</h2>
     <h3>{{ recipe.name_recept }}</h3>
     <img src="{{ recipe.image.url }}" alt="Фото" width=100px>
     <p>Время приготовления: {{ recipe.cooking_time|time:"h:i" }}</p>
