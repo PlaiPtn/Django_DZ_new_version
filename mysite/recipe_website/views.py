@@ -18,6 +18,9 @@ class MainPageView(ListView):
     template_name = 'recipe_website/index.html'
     paginate_by = 5
 
+    def get_queryset(self):
+        return Recipes.objects.all().order_by('-id')
+
 
 class MyRecipesView(ListView):
     template_name = 'recipe_website/my_recipes.html'
@@ -25,13 +28,6 @@ class MyRecipesView(ListView):
 
     def get_queryset(self):
         return Recipes.objects.filter(user=self.request.user).order_by('-id')
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     # list_my_recipes = self.get_queryset()
-    #     # context['recipes'] = list_my_recipes
-    #     return context
-
 
 class RegisterView(CreateView):
     template_name = 'recipe_website/registration.html'

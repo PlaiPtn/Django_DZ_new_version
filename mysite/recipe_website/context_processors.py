@@ -7,6 +7,6 @@ def categories(request):
     summary = Summary.objects.all()
     dict_categories = {(category.categories_name, category.id): [] for category in list_categories}
     for category in list_categories:
-        recipes_id = summary.filter(categories=category.id).values_list('recipes_id', flat=True).order_by('-id')
-        dict_categories[(category.categories_name, category.id)] = recipes.filter(id__in=recipes_id).order_by('-id')
+        recipes_id = summary.filter(categories=category.id).values_list('recipes_id', flat=True)
+        dict_categories[(category.categories_name, category.id)] = recipes.filter(id__in=recipes_id).order_by('-id')[:4]
     return {'dict_categories': dict_categories}
