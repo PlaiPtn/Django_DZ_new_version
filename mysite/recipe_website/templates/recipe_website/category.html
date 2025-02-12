@@ -3,21 +3,18 @@
     Категория
 {% endblock %}
 {% block right_bar %}
-    {% if is_authenticated %}
-        <h2><a href="{% url "recipe_website:my_recept" %}">Мои рецепты</a></h2>
-    {% endif %}
     <h2>{{ category_name }}</h2>
     <ul>
-        {% for recipe in recipes %}
+        {% for recept in page_obj %}
             <div class="recept">
                     <div class="recept_image">
-                        <img src="{{ recipe.image.url }}" alt="Фото" width="160px" height="160px">
+                        <img src="{{ recept.recipes.image.url }}" alt="Фото" width="160px" height="160px">
                     </div>
                     <div class="recept_text">
-                        <h3><a href="{% url 'recipe_website:recept_detail' pk=recipe.pk %}">{{ recipe.name_recept }}</a></h3>
-                        <p>Время приготовления: {{ recipe.get_time_str }}</p>
-                        <p>{{ recipe.description }}</p>
-                        <p>Автор: {{ recipe.user }}</p>
+                        <h3><a href="{% url 'recipe_website:recept_detail' pk=recept.recipes.pk %}">{{ recept.recipes.name_recept }}</a></h3>
+                        <p>Время приготовления: {{ recept.recipes.get_time_str }}</p>
+                        <p>{{ recept.recipes.get_description }}</p>
+                        <p>Автор: {{ recept.recipes.user.username}}</p>
                     </div>
             </div>
         {% endfor %}

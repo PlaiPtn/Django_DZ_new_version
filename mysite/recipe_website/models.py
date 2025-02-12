@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from textwrap import shorten
 
 
 # Create your models here.
@@ -19,6 +20,9 @@ class Recipes(models.Model):
     cooking_time = models.TimeField(help_text='Формат "чч:мм"')
     image = models.ImageField(upload_to='recipe_website')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def get_description(self):
+        return shorten(self.description, width=150)
 
     def get_ingredients_list(self):
         return self.ingredients.split(';')

@@ -21,10 +21,10 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('create/', ReceptCreateView.as_view(), name='create_recept'),
     path('my-recept/', MyRecipesView.as_view(), name='my_recept'),
+    path('my-recept/<int:pk>', MyRecipesView.as_view(), name='my_recept_category'),
     path('recept/<int:pk>/', ReceptDetailView.as_view(), name='recept_detail'),
     path('recept/<int:pk>/update/', ReceptUpdateView.as_view(), name='recept_update'),
     path('recept/<int:pk>/delete/', ReceptDeleteView.as_view(), name='recept_delete'),
-    path('category/<int:pk>/<int:user>/', CategoriesRecipesListView.as_view(), name='categories_user'),
     path('category/<int:pk>/', CategoriesRecipesListView.as_view(), name='categories'),
 ]
 

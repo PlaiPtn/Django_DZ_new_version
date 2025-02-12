@@ -120,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -132,6 +132,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -146,6 +147,11 @@ LOGIN_REDIRECT_URL = reverse_lazy('recipe_website:index_page')
 LOGIN_URL = reverse_lazy('recipe_website:login')
 
 LOGLEVEL = getenv("DJANGO_LOGLEVEL", "info").upper()
+
+LOGFILE_NAME = BASE_DIR / r'logs/log.txt'
+LOGFILE_SIZE = 2 * 1024 * 1024
+LOGFILE_COUNT = 3
+
 logging.config.dictConfig({
     "version": 1,
     "disable_existing_loggers": False,
@@ -158,13 +164,22 @@ logging.config.dictConfig({
         "console": {
             "class": "logging.StreamHandler",
             "formatter": "console",
+        },
+        "logfile": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "formatter": "console",
+            "filename": LOGFILE_NAME,
+            "maxBytes": LOGFILE_SIZE,
+            "backupCount": LOGFILE_COUNT,
+
         }
     },
     "loggers": {
         "": {
             "level": LOGLEVEL,
             "handlers": [
-                "console"
+                "console",
+                "logfile",
             ],
         },
     },
