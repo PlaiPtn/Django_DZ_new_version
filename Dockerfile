@@ -7,6 +7,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requarements.txt
 COPY mysite .
 
-#RUN python manage.py collectstatic --noinput
+RUN mkdir -p logs
+RUN python manage.py collectstatic --noinput
 
 CMD ["gunicorn", "mysite.wsgi:application", "--bind", "0.0.0.0:8000"]

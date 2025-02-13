@@ -5,11 +5,6 @@ services:
     build:
       dockerfile: Dockerfile
     image: django_dz
-    command:
-      - gunicorn
-      - mysite.wsgi:application
-      - --bind
-      - "0.0.0.0:8000"
     ports:
       - "8000:8000"
     restart: always
@@ -24,6 +19,7 @@ services:
       - ./mysite/database:/app/database
       - ./mysite/static:/app/static
       - ./mysite/media:/app/media
+      - ./mysite/logs:/app/logs
 
 
   nginx:

@@ -1,5 +1,6 @@
 .idea
 .venv
 .env
+.gitignore
 mysite/recipe_website/__pycache__
 mysite/mysite/__pycache__
